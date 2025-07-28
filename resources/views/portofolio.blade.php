@@ -70,7 +70,7 @@
             right: 0;
             height: 3px;
             background: linear-gradient(90deg, #3b82f6, #60a5fa);
-            border-radius: 12px 12px 0 0;
+            border-radius: 24px 24px 0 0;
         }
     </style>
 </head>
@@ -86,7 +86,7 @@
                         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-electric-blue transition-all duration-300 group-hover:w-full"></span>
                     </a>
                     <a href="#experience" class="text-gray-300 hover:text-electric-blue transition-all duration-300 relative group">
-                        Experience
+                        Experiences
                         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-electric-blue transition-all duration-300 group-hover:w-full"></span>
                     </a>
                     <a href="#projects" class="text-gray-300 hover:text-electric-blue transition-all duration-300 relative group">
@@ -106,10 +106,14 @@
     <section class="min-h-screen gradient-bg flex items-center justify-center relative overflow-hidden">
         <div class="absolute inset-0 bg-black/20"></div>
         <div class="text-center animate-fade-in relative z-10">
-            <div class="w-40 h-40 glass-effect rounded-full mx-auto mb-8 flex items-center justify-center animate-float">
-                <svg class="w-20 h-20 text-electric-blue" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                </svg>
+            <div class="w-40 h-40 glass-effect rounded-full mx-auto mb-8 flex items-center justify-center animate-float overflow-hidden">
+                @if(isset($data['about']['profile_photo']) && $data['about']['profile_photo'])
+                    <img src="{{ asset($data['about']['profile_photo']) }}" alt="{{ $data['about']['name'] }}" class="w-full h-full object-cover">
+                @else
+                    <svg class="w-20 h-20 text-electric-blue" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                    </svg>
+                @endif
             </div>
             <h1 class="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white to-electric-blue bg-clip-text text-transparent">
                 {{ $data['about']['name'] }}
@@ -156,7 +160,7 @@
                                     </svg>
                                     Years Experience
                                 </span>
-                                <span class="text-2xl font-bold text-electric-blue">5+</span>
+                                <span class="text-2xl font-bold text-electric-blue">2+</span>
                             </li>
                             <li class="flex items-center justify-between py-3 border-b border-gray-700">
                                 <span class="flex items-center">
@@ -165,7 +169,7 @@
                                     </svg>
                                     Projects Completed
                                 </span>
-                                <span class="text-2xl font-bold text-electric-blue">50+</span>
+                                <span class="text-2xl font-bold text-electric-blue">10+</span>
                             </li>
                             <li class="flex items-center justify-between py-3">
                                 <span class="flex items-center">
@@ -174,7 +178,7 @@
                                     </svg>
                                     Specialization
                                 </span>
-                                <span class="text-lg font-semibold text-electric-blue">Full Stack</span>
+                                <span class="text-lg font-semibold text-electric-blue">Front-End</span>
                             </li>
                         </ul>
                     </div>
@@ -192,10 +196,10 @@
                 <p class="text-xl text-blue-200">Building expertise through diverse challenges</p>
             </div>
             
-            <!-- Linear Experience Layout -->
+            <!-- Experience Layout -->
             <div class="space-y-8">
                 @foreach($data['experiences'] as $index => $experience)
-                <div class="experience-card p-8 rounded-2xl transform hover:scale-105 transition-all duration-500 animate-slide-up" style="animation-delay: {{ $index * 0.2 }}s">
+                <div class="experience-card p-8 rounded-3xl transform hover:scale-105 transition-all duration-500 animate-slide-up" style="animation-delay: {{ $index * 0.2 }}s">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                         <div class="flex-1 mb-6 md:mb-0">
                             <div class="flex items-center mb-4">
@@ -210,7 +214,7 @@
                             <p class="text-gray-300 text-lg leading-relaxed">{{ $experience['description'] }}</p>
                         </div>
                         <div class="md:ml-8 md:text-right">
-                            <div class="inline-block bg-navy px-6 py-3 rounded-xl border border-electric-blue/30">
+                            <div class="inline-block bg-navy px-6 py-3 rounded-2xl border border-electric-blue/30">
                                 <p class="text-electric-blue font-bold text-lg">{{ $experience['period'] }}</p>
                             </div>
                         </div>
@@ -231,9 +235,9 @@
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                 @foreach($data['projects'] as $project)
-                <div class="experience-card rounded-2xl overflow-hidden hover:scale-105 transform transition-all duration-500 animate-slide-up group">
+                <div class="experience-card rounded-3xl overflow-hidden hover:scale-105 transform transition-all duration-500 animate-slide-up group">
                     <div class="relative overflow-hidden">
-                        <img src="{{ $project['image'] }}" alt="{{ $project['title'] }}" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="{{ asset($project['image']) }}" alt="{{ $project['title'] }}" class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                     <div class="p-8">
@@ -262,7 +266,7 @@
         <div class="absolute inset-0 bg-black/30"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center mb-20">
-                <h2 class="text-5xl font-bold text-white mb-6">Let's Connect</h2>
+                <h2 class="text-5xl font-bold text-white mb-6">Contact</h2>
                 <div class="w-32 h-1 bg-white mx-auto mb-6"></div>
                 <p class="text-xl text-blue-200">Ready to bring your ideas to life?</p>
             </div>
@@ -327,7 +331,7 @@
     <footer class="bg-black border-t border-electric-blue/20 py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
-                <h3 class="text-3xl font-bold mb-8 text-white">Let's Stay Connected</h3>
+                <h3 class="text-3xl font-bold mb-8 text-white">Social Media</h3>
                 <div class="flex justify-center space-x-8 mb-12">
                     <a href="{{ $data['social']['instagram'] }}" target="_blank" class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center hover:scale-110 transform transition-all duration-300 animate-glow">
                         <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
@@ -346,7 +350,7 @@
                     </a>
                 </div>
                 <div class="border-t border-gray-700 pt-8">
-                    <p class="text-gray-400 text-lg">&copy; 2024 {{ $data['about']['name'] }}. Crafted with passion and precision.</p>
+                    <p class="text-gray-400 text-lg">&copy; 2025 {{ $data['about']['name'] }}. Crafted with passion and precision.</p>
                 </div>
             </div>
         </div>

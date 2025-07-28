@@ -10,7 +10,7 @@
         <p class="text-gray-600 mt-1">Manage your personal information displayed on the portfolio</p>
     </div>
     
-    <form action="{{ route('admin.about.store') }}" method="POST" class="p-6 space-y-6">
+    <form action="{{ route('admin.about.store') }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-6">
         @csrf
         
         <div>
@@ -22,6 +22,25 @@
                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                    required>
             @error('name')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div>
+            <label for="profile_photo" class="block text-sm font-medium text-gray-700 mb-2">Profile Photo</label>
+            @if($about && $about->profile_photo)
+                <div class="mb-3">
+                    <img src="{{ asset($about->profile_photo) }}" alt="Current profile photo" class="w-32 h-32 object-cover rounded-full border">
+                    <p class="text-sm text-gray-500 mt-1">Current photo</p>
+                </div>
+            @endif
+            <input type="file" 
+                   id="profile_photo" 
+                   name="profile_photo" 
+                   accept="image/*"
+                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+            <p class="text-gray-500 text-sm mt-1">Choose a profile photo (JPG, PNG, GIF) - leave empty to keep current</p>
+            @error('profile_photo')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
             @enderror
         </div>

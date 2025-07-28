@@ -15,7 +15,8 @@ class About extends Model
         'name',
         'title', 
         'description',
-        'skills'
+        'skills',
+        'profile_photo'
     ];
 
     protected $casts = [

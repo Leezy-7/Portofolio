@@ -32,12 +32,14 @@ class PortofolioController extends Controller
                 'name' => $about->name,
                 'title' => $about->title,
                 'description' => $about->description,
-                'skills' => $about->skills ?? []
+                'skills' => $about->skills ?? [],
+                'profile_photo' => $about->profile_photo
             ] : [
                 'name' => 'Your Name',
                 'title' => 'Full Stack Developer',
                 'description' => 'Passionate developer with experience in creating innovative web solutions. I love turning complex problems into simple, beautiful and intuitive designs.',
-                'skills' => ['PHP', 'Laravel', 'JavaScript', 'Vue.js', 'MySQL', 'TailwindCSS']
+                'skills' => ['PHP', 'Laravel', 'JavaScript', 'Vue.js', 'MySQL', 'TailwindCSS'],
+                'profile_photo' => null
             ],
             'experiences' => $experiences->count() > 0 ? $experiences->toArray() : [
                 [

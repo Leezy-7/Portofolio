@@ -21,8 +21,8 @@
             @foreach($projects as $project)
             <div class="border border-gray-200 rounded-lg overflow-hidden">
                 <div class="aspect-w-16 aspect-h-9">
-                    <img src="{{ $project->image }}" 
-                         alt="{{ $project->title }}"
+                    <img src="{{ asset($project->image) }}" 
+                         alt="{{ $project->title }} project screenshot"
                          class="w-full h-48 object-cover">
                 </div>
                 <div class="p-4">

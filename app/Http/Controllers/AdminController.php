@@ -37,20 +37,32 @@ class AdminController extends Controller
             'name' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'skills' => 'required|string'
+            'skills' => 'required|string',
+            'profile_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif'
         ]);
 
         $skills = array_map('trim', explode(',', $request->skills));
 
-        About::updateOrCreate(
-            ['id' => 1],
-            [
-                'name' => $request->name,
-                'title' => $request->title,
-                'description' => $request->description,
-                'skills' => $skills
-            ]
-        );
+        $about = About::firstOrNew(['id' => 1]);
+        
+        // Handle profile photo upload
+        if ($request->hasFile('profile_photo')) {
+            // Delete old photo if exists
+            if ($about->profile_photo && file_exists(public_path($about->profile_photo))) {
+                unlink(public_path($about->profile_photo));
+            }
+            
+            $image = $request->file('profile_photo');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('image'), $imageName);
+            $about->profile_photo = 'image/' . $imageName;
+        }
+
+        $about->name = $request->name;
+        $about->title = $request->title;
+        $about->description = $request->description;
+        $about->skills = $skills;
+        $about->save();
 
         return redirect()->back()->with('success', 'About information updated successfully');
     }
@@ -127,7 +139,7 @@ class AdminController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'technologies' => 'required|string',
             'link' => 'nullable|string',
             'order' => 'nullable|integer',
@@ -136,10 +148,19 @@ class AdminController extends Controller
 
         $technologies = array_map('trim', explode(',', $request->technologies));
 
+        // Handle file upload
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('image'), $imageName);
+            $imagePath = 'image/' . $imageName;
+        }
+
         Project::create([
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $request->image,
+            'image' => $imagePath,
             'technologies' => $technologies,
             'link' => $request->link,
             'order' => $request->order ?? 0,
@@ -159,7 +180,7 @@ class AdminController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'technologies' => 'required|string',
             'link' => 'nullable|string',
             'order' => 'nullable|integer',
@@ -168,10 +189,24 @@ class AdminController extends Controller
 
         $technologies = array_map('trim', explode(',', $request->technologies));
 
+        // Handle file upload
+        $imagePath = $project->image; // Keep current image if no new upload
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($project->image && file_exists(public_path($project->image))) {
+                unlink(public_path($project->image));
+            }
+            
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('image'), $imageName);
+            $imagePath = 'image/' . $imageName;
+        }
+
         $project->update([
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $request->image,
+            'image' => $imagePath,
             'technologies' => $technologies,
             'link' => $request->link,
             'order' => $request->order ?? 0,
