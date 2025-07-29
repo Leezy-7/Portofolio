@@ -4,9 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PortofolioController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\ContactMessageController;
 
 Route::get('/', [PortofolioController::class, 'index']);
 Route::get('/portfolio', [PortofolioController::class, 'index']);
+
+// Contact Message Route (Public)
+Route::post('/contact-message', [ContactMessageController::class, 'store'])->name('contact.message.store');
 
 // Admin Authentication Routes
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -42,6 +46,11 @@ Route::prefix('admin')->name('admin.')->middleware('admin.auth')->group(function
     // Contact Management
     Route::get('/contact', [AdminController::class, 'contactIndex'])->name('contact.index');
     Route::post('/contact', [AdminController::class, 'contactStore'])->name('contact.store');
+    
+    // Contact Messages Management
+    Route::get('/contact/messages', [ContactMessageController::class, 'index'])->name('contact.messages');
+    Route::patch('/contact/messages/{id}/read', [ContactMessageController::class, 'markAsRead'])->name('contact.messages.read');
+    Route::delete('/contact/messages/{id}', [ContactMessageController::class, 'destroy'])->name('contact.messages.destroy');
     
     // Social Links Management
     Route::get('/social', [AdminController::class, 'socialIndex'])->name('social.index');

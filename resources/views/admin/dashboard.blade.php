@@ -4,8 +4,8 @@
 @section('page-title', 'Dashboard')
 
 @section('content')
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
-    <div class="bg-white rounded-lg shadow p-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 mb-8">
+    <a href="{{ route('admin.about.index') }}" class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow cursor-pointer">
         <div class="flex items-center">
             <div class="p-3 rounded-full bg-blue-100 text-blue-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -17,9 +17,9 @@
                 <p class="text-lg font-semibold">{{ $stats['about'] }}</p>
             </div>
         </div>
-    </div>
+    </a>
 
-    <div class="bg-white rounded-lg shadow p-6">
+    <a href="{{ route('admin.experience.index') }}" class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow cursor-pointer">
         <div class="flex items-center">
             <div class="p-3 rounded-full bg-green-100 text-green-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -27,13 +27,13 @@
                 </svg>
             </div>
             <div class="ml-4">
-                <p class="text-sm text-gray-500">Experience</p>
+                <p class="text-sm text-gray-500">Experiences</p>
                 <p class="text-lg font-semibold">{{ $stats['experiences'] }}</p>
             </div>
         </div>
-    </div>
+    </a>
 
-    <div class="bg-white rounded-lg shadow p-6">
+    <a href="{{ route('admin.project.index') }}" class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow cursor-pointer">
         <div class="flex items-center">
             <div class="p-3 rounded-full bg-purple-100 text-purple-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -45,9 +45,9 @@
                 <p class="text-lg font-semibold">{{ $stats['projects'] }}</p>
             </div>
         </div>
-    </div>
+    </a>
 
-    <div class="bg-white rounded-lg shadow p-6">
+    <a href="{{ route('admin.contact.index') }}" class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow cursor-pointer">
         <div class="flex items-center">
             <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,9 +59,23 @@
                 <p class="text-lg font-semibold">{{ $stats['contact'] }}</p>
             </div>
         </div>
-    </div>
+    </a>
 
-    <div class="bg-white rounded-lg shadow p-6">
+    <a href="{{ route('admin.contact.messages') }}" class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow cursor-pointer">
+        <div class="flex items-center">
+            <div class="p-3 rounded-full bg-indigo-100 text-indigo-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                </svg>
+            </div>
+            <div class="ml-4">
+                <p class="text-sm text-gray-500">Messages</p>
+                <p class="text-lg font-semibold">{{ $stats['messages'] ?? 0 }}</p>
+            </div>
+        </div>
+    </a>
+
+    <a href="{{ route('admin.social.index') }}" class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow cursor-pointer">
         <div class="flex items-center">
             <div class="p-3 rounded-full bg-red-100 text-red-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,7 +87,8 @@
                 <p class="text-lg font-semibold">{{ $stats['social_links'] }}</p>
             </div>
         </div>
-    </div>
+    </a>
+
 </div>
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">

@@ -265,6 +265,11 @@
     <section id="contact" class="py-24 gradient-bg relative">
         <div class="absolute inset-0 bg-black/30"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            @if(session('success'))
+                <div class="bg-green-500 text-white px-6 py-4 rounded-xl mb-8 text-center animate-fade-in">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="text-center mb-20">
                 <h2 class="text-5xl font-bold text-white mb-6">Contact</h2>
                 <div class="w-32 h-1 bg-white mx-auto mb-6"></div>
@@ -308,15 +313,16 @@
                     </div>
                 </div>
                 <div class="glass-effect p-8 rounded-2xl">
-                    <form class="space-y-6">
+                    <form action="{{ route('contact.message.store') }}" method="POST" class="space-y-6">
+                        @csrf
                         <div>
-                            <input type="text" placeholder="Your Name" class="w-full px-6 py-4 bg-black/30 border border-electric-blue/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-300">
+                            <input type="text" name="name" placeholder="Your Name" class="w-full px-6 py-4 bg-black/30 border border-electric-blue/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-300" required>
                         </div>
                         <div>
-                            <input type="email" placeholder="Your Email" class="w-full px-6 py-4 bg-black/30 border border-electric-blue/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-300">
+                            <input type="email" name="email" placeholder="Your Email" class="w-full px-6 py-4 bg-black/30 border border-electric-blue/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent transition-all duration-300" required>
                         </div>
                         <div>
-                            <textarea rows="5" placeholder="Your Message" class="w-full px-6 py-4 bg-black/30 border border-electric-blue/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent resize-none transition-all duration-300"></textarea>
+                            <textarea name="message" rows="5" placeholder="Your Message" class="w-full px-6 py-4 bg-black/30 border border-electric-blue/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-electric-blue focus:border-transparent resize-none transition-all duration-300" required></textarea>
                         </div>
                         <button type="submit" class="w-full bg-electric-blue text-black py-4 rounded-xl font-bold hover:bg-blue-400 transform hover:scale-105 transition-all duration-300 animate-glow">
                             Send Message

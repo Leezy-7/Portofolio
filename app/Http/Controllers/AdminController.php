@@ -8,6 +8,7 @@ use App\Models\Experience;
 use App\Models\Project;
 use App\Models\Contact;
 use App\Models\SocialLink;
+use App\Models\ContactMessage;
 
 class AdminController extends Controller
 {
@@ -18,7 +19,8 @@ class AdminController extends Controller
             'experiences' => Experience::count(),
             'projects' => Project::count(),
             'contact' => Contact::count(),
-            'social_links' => SocialLink::count()
+            'social_links' => SocialLink::count(),
+            'messages' => ContactMessage::count()
         ];
         
         return view('admin.dashboard', compact('stats'));
