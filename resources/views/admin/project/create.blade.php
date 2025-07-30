@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.components.layout')
 
 @section('title', 'Add Project')
 @section('page-title', 'Add New Project')

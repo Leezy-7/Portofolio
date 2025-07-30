@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.components.layout')
 
 @section('title', 'Contact Messages')
 @section('page-title', 'Contact Messages')

@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('admin.components.layout')
 
 @section('title', 'Social Links Management')
 @section('page-title', 'Social Links Management')
